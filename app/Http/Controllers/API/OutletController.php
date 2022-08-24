@@ -55,11 +55,28 @@ class OutletController extends Controller
     public function update(Request $request, Outlet $outlet)
     {
         $input = $request->all();  
-        $outlet->name = $input['name'];
-        $outlet->phone = $input['phone'];   
-        $outlet->latitude = $input['latitude'];
-        $outlet->longitude = $input['longitude'];        
-        $outlet->image = $input['image'];        
+        // $outlet->name = $input['name'];
+        // $outlet->phone = $input['phone'];   
+        // $outlet->latitude = $input['latitude'];
+        // $outlet->longitude = $input['longitude'];        
+        // $outlet->image = $input['image'];        
+
+        //partial update
+        if (request()->has('name')) {
+            $outlet->name = request('name');
+        } 
+        if (request()->has('phone')) {
+            $outlet->phone = request('phone');
+        } 
+        if (request()->has('latitude')) {
+            $outlet->latitude = $request->latitude;
+        }
+        if (request()->has('longitude')) {
+            $outlet->longitude = request('longitude');
+        } 
+        if (request()->has('image')) {
+            $outlet->image = $request->image;
+        }
 
         $outlet->save();
         return response()->json([
